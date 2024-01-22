@@ -6,7 +6,9 @@ from firebase.firebase_utils import write_task_item
 
 
 st.title("Myelin - Rewriting Rachel Turns")
-st.subheader("Please read the following conversation snippet and then rate and rewrite the final turn.")
+st.subheader("Read the following conversation snippet and then rate and rewrite the final turn.")
+
+user_name = st.text_input("Enter your name:")
 
 # transcripts in json turn format
 # sample turns
@@ -55,7 +57,7 @@ with st.container(border=True):
 # rating
 # field for rewrite
 with st.form(key='my_form', clear_on_submit=True):
-    st.write("Please rate the final turn above on a scale of 1-7 for overall quality, where 1 is 'very bad' and 7 is 'very good'")
+    st.write("Rate the final turn above on a scale of 1-7 for overall quality, where 1 is 'very bad' and 7 is 'very good'")
     rating = st.slider(label='Rating', min_value=1, max_value=7, step=1)
     st.write("Also provide a rewrite of the final turn. You can rewrite the turn however you like, but try to make it more natural and fluent. You can also add or remove information if you think it would improve the turn")
     rewrite = st.text_area(label='Rewrite')
@@ -68,6 +70,7 @@ with st.form(key='my_form', clear_on_submit=True):
             "rewrite": rewrite,
             "turn": turn,
             "turn_ind": turn_ind,
-            "transcript": transcript
+            "transcript": transcript,
+            "user_name": user_name
         }, "myelin_human_rewrites")
 
